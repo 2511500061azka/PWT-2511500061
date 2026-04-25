@@ -29,7 +29,7 @@ if(isset($_POST['tambah'])) {
     $Alamat = $_POST['Alamat'];
 
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = '1234';
     $role = "guru";
 
     $insert = mysqli_query($koneksi,"INSERT INTO guru values ('$Kd_guru','$Nm_guru','$Jenkel','$Pend_terakhir','$Hp','$Alamat')");
@@ -90,11 +90,6 @@ if(isset($_POST['tambah'])) {
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" name="username" id="username" placeholder="Username" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Password" class="form-control">
                         </div>
 
                         <div class="card-footer">
