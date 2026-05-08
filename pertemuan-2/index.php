@@ -123,6 +123,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
+                <a href="index.php?page=ekstra2511500061" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ekstrakurikuler</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="index.php?page=mapel" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Mata Pelajaran</p>
@@ -135,7 +141,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="index.php?page=siswa" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Siswa</p>
                 </a>
