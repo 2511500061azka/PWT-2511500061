@@ -1,12 +1,12 @@
 <?php
 if (isset($_GET['hapus'])) {
-    $Kd_jadwal = $_GET['hapus'];
+    $Id_jadwal = $_GET['hapus'];
 
     // Hapus detail jadwal dulu
-    mysqli_query($koneksi, "DELETE FROM detail_jadwal WHERE Kd_jadwal = '$Kd_jadwal'");
+    mysqli_query($koneksi, "DELETE FROM detail_kelas WHERE Id_jadwal = '$Id_jadwal'");
 
     // Lalu hapus jadwal
-    $hapus = mysqli_query($koneksi, "DELETE FROM jadwal WHERE Kd_jadwal = '$Kd_jadwal'");
+    $hapus = mysqli_query($koneksi, "DELETE FROM jadwal_kelas WHERE Id_jadwal = '$Id_jadwal'");
 
     if ($hapus) {
         echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -40,45 +40,47 @@ if (isset($_GET['hapus'])) {
         <div class="card">
             <div class="card-body">
                  <?php if ($role == 'admin') { ?>
-                <a href="index.php?page=tambah_jadwal" class="btn btn-primary btn-sm">
+                <a href="index.php?page=tambah_jadwalkls" class="btn btn-primary btn-sm">
                     Tambah Jadwal</a>
         </a>
     <?php } ?>
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>Kode Jadwal</th>
-                            <th>Guru</th>
-                            <th>Semester</th>
+                            <th>Id Jadwal</th>
+                            <th>Kelas</th>
                             <th>Tahun Ajaran</th>
+                            <th>Semester</th>
                             <th>Detail Jadwal</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $query = mysqli_query($koneksi, "SELECT * FROM jadwal JOIN guru ON jadwal.Kd_guru = guru.Kd_guru");
+                        $query = mysqli_query($koneksi, "SELECT * FROM jadwal_kelas JOIN kelas ON jadwal_kelas.Id_kelas = kelas.Id_kelas");
                         while ($row = mysqli_fetch_assoc($query)) {
                                 echo "<tr>
-                                <td>{$row['Kd_jadwal']}</td>
-                                <td>{$row['Nm_guru']}</td>
+                                <td>{$row['Id_jadwal']}</td>
+                                <td>{$row['Nm_kelas']}</td>
+                                <td>{$row['Thn_ajaran']}</td>
                                 <td>{$row['Semester']}</td>
-                                <td>{$row['Tahun_ajaran']}</td>
                                 <td>
                                 <ul>";
-                             $det = mysqli_query($koneksi, "SELECT d.*, m.Nm_mapel FROM detail_jadwal d 
+                             $det = mysqli_query($koneksi, "SELECT d.*, m.Nm_mapel, g.Nm_guru 
+                                FROM detail_kelas d 
                                 JOIN mapel m ON d.Kd_mapel = m.Kd_mapel 
-                                WHERE Kd_jadwal = '{$row['Kd_jadwal']}'");
+                                JOIN guru g ON d.Kd_guru = g.Kd_guru
+                                WHERE d.Id_jadwal = '{$row['Id_jadwal']}'");
                             while ($d = mysqli_fetch_assoc($det)) {
-                                echo "<li>{$d['Nm_mapel']} - {$d['Hari']} - {$d['Jam']} - {$d['Kelas']}</li>";
+                                echo "<li>{$d['Nm_mapel']} - {$d['Nm_guru']} - {$d['Hari']} - {$d['Jam']}</li>";
                             }
                             echo "</ul>
                                 </td>
                                 <td>
-                                    <a href='index.php?page=jadwal&hapus={$row['Kd_jadwal']}' 
+                                    <a href='index.php?page=jadwal_kelas&hapus={$row['Id_jadwal']}' 
                                        onclick=\"return confirm('yakin ingin menghapus data ini?')\" 
                                        class='btn btn-danger btn-sm'>Hapus</a>
-                                    <a href='cetak_jadwal.php?Kd_jadwal=".$row['Kd_jadwal']."' 
+                                    <a href='cetak_kelas.php?Id_jadwal=".$row['Id_jadwal']."' 
                                     target='_blank'
                                     class='btn btn-success btn-sm'>Cetak</a>
                                 </td>
