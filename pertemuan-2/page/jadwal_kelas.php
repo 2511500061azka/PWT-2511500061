@@ -74,18 +74,18 @@ if (isset($_GET['hapus'])) {
                             while ($d = mysqli_fetch_assoc($det)) {
                                 echo "<li>{$d['Nm_mapel']} - {$d['Nm_guru']} - {$d['Hari']} - {$d['Jam']}</li>";
                             }
-                            echo "</ul>
+                            echo "</ul></td><td>";
+                            if ($role == 'admin') {
+                                echo "<a href='index.php?page=jadwal_kelas&hapus={$row['Id_jadwal']}' 
+                                onclick=\"return confirm('yakin ingin menghapus data ini?')\" 
+                                class='btn btn-danger btn-sm'>Hapus</a>";
+                                }
+                                echo "<a href='cetak_kelas.php?Id_jadwal={$row['Id_jadwal']}' 
+                                target='_blank'
+                                class='btn btn-success btn-sm'>Cetak</a>
                                 </td>
-                                <td>
-                                    <a href='index.php?page=jadwal_kelas&hapus={$row['Id_jadwal']}' 
-                                       onclick=\"return confirm('yakin ingin menghapus data ini?')\" 
-                                       class='btn btn-danger btn-sm'>Hapus</a>
-                                    <a href='cetak_kelas.php?Id_jadwal=".$row['Id_jadwal']."' 
-                                    target='_blank'
-                                    class='btn btn-success btn-sm'>Cetak</a>
-                                </td>
-                            </tr>";
-                        }
+                                </tr>";
+                                }
                         ?>
                     </tbody>
                 </table>
